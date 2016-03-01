@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 
 /**
  * Tests ColaItem follows expectations
- * @author trent_000
  */
 public class ColaItemTest 
 {
