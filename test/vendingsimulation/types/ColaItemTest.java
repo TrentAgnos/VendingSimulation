@@ -21,7 +21,7 @@ public class ColaItemTest
     public void testGetNameReturnsCola()
     {
         System.out.println("testGetNameReturnsCola");
-        ColaItem cola = new ColaItem();
+        ColaItem cola = new ColaItem( new BigDecimal(1.00));
         assertEquals("Cola", cola.GetName() );
     }
     
@@ -32,7 +32,20 @@ public class ColaItemTest
     public void testGetCostInUSDReturnsOneDollar()
     {
         System.out.println("testGetCostInUSDReturnsOneDollar");
-        ColaItem cola = new ColaItem();
-        assertEquals( new BigDecimal(1.00), cola.GetCostInUSD());
+        BigDecimal test_val = new BigDecimal(1.00);
+        ColaItem cola = new ColaItem(test_val);
+        assertEquals( test_val, cola.GetCostInUSD());
+    }
+    
+    /**
+     * Tests that the cost of a cola can be changed
+     */
+    @Test
+    public void testGetCostInUSDReturnsWhatIsSetInConstructor()
+    {
+        System.out.println("testGetCostInUSDReturnsWhatIsSetInConstructor");
+        BigDecimal test_val = new BigDecimal(65.00);
+        ColaItem cola = new ColaItem(test_val);
+        assertEquals( test_val, cola.GetCostInUSD());
     }
 }

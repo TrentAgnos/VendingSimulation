@@ -8,13 +8,14 @@ import java.math.BigDecimal;
 public class ColaItem implements VendableItem
 {
     // The cost of a cola in this vending machine
-    final static double COST = 1.00;
+    BigDecimal m_cost;
     
     /**
      * Constructor
      */
-    public ColaItem()
+    public ColaItem( BigDecimal cost )
     {
+        m_cost = cost;
     }
     
     /**
@@ -23,7 +24,7 @@ public class ColaItem implements VendableItem
      */
     public BigDecimal GetCostInUSD()
     {
-        return new BigDecimal( COST );
+        return m_cost;
     }
     
     /**
