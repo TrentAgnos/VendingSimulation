@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vendingsimulation.displayui.MainDialogController">
+   <children>
+      <Button fx:id="buttonCola" layoutX="27.0" layoutY="129.0" mnemonicParsing="false" onAction="#handleButtonCola" text="Cola" />
+      <Button fx:id="buttonCandy" layoutX="165.0" layoutY="129.0" mnemonicParsing="false" onAction="#handleButtonCandy" text="Candy" />
+      <Button fx:id="buttonChips" layoutX="96.0" layoutY="129.0" mnemonicParsing="false" onAction="#handleButtonChips" text="Chips" />
+      <ChoiceBox fx:id="choiceBoxCoins" layoutX="430.0" layoutY="188.0" prefWidth="150.0" />
+      <Label fx:id="labelDisplay" layoutX="432.0" layoutY="133.0" prefHeight="39.0" prefWidth="150.0" textAlignment="CENTER">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttonEjectUnspentMoney" layoutX="430.0" layoutY="224.0" mnemonicParsing="false" onAction="#handleButtonEjectUnspentMoney" prefHeight="25.0" prefWidth="150.0" text="Eject Unspent Money" />
+      <Button fx:id="buttonInsertCoin" layoutX="429.0" layoutY="160.0" mnemonicParsing="false" onAction="#handleButtonInsertCoin" prefHeight="25.0" prefWidth="150.0" text="Insert Coin" />
+   </children>
+</AnchorPane>
