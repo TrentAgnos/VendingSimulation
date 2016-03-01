@@ -19,6 +19,6 @@ public class ColaItem implements VendableItem
     public String GetName()
     {
         // TODO support internationalizations
-        return ""; 
+        return "Cola"; 
     }
 }
