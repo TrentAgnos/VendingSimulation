@@ -3,6 +3,7 @@ package vendingsimulation.inventory;
 import java.math.BigDecimal;
 import java.util.concurrent.ConcurrentSkipListMap;
 
+import vendingsimulation.common.CommonIncludes;
 import vendingsimulation.displayui.MainDialogModel;
 import vendingsimulation.types.PricedAndNamedItem;
 import vendingsimulation.types.VendableItem;
@@ -14,7 +15,7 @@ import vendingsimulation.types.VendableItem;
  * hardware I'm just assuming each item has its own slot and holds 3.
  * Further, I'm going to start the program with 3 of each.
  */
-public class ThreeItemsEachInventoryManager 
+public class ThreeItemsEachInventoryManager implements InventoryManager
 {
     /**
      * The main dialog mode. Used to pop up a message on the UI
@@ -41,11 +42,11 @@ public class ThreeItemsEachInventoryManager
         m_model = model;
         m_inventory_storage = new ConcurrentSkipListMap<String, Integer>();
         PricedAndNamedItem cola = new PricedAndNamedItem( 
-            new BigDecimal( 1.00 ), "cola" );
+            CommonIncludes.COST_OF_COLA, CommonIncludes.COLA_NAME );
         PricedAndNamedItem candy = new PricedAndNamedItem( 
-            new BigDecimal( 0.65 ), "candy" );
+            CommonIncludes.COST_OF_CANDY, CommonIncludes.CANDY_NAME );
         PricedAndNamedItem chips = new PricedAndNamedItem( 
-            new BigDecimal( 0.50 ), "chips" );
+            CommonIncludes.COST_OF_CHIPS, CommonIncludes.CHIPS_NAME );
         m_inventory_storage.put( cola.GetName(), storage_space );
         m_inventory_storage.put( candy.GetName(), storage_space );
         m_inventory_storage.put( chips.GetName(), storage_space );
@@ -56,7 +57,7 @@ public class ThreeItemsEachInventoryManager
      * @param item  The item to check 
      * @return True if the item is in stock
      */
-    boolean hasInventory( VendableItem item )
+    public boolean hasInventory( VendableItem item )
     {
         Integer val = m_inventory_storage.get( item.GetName() );
         if ( val == null )
@@ -74,7 +75,7 @@ public class ThreeItemsEachInventoryManager
      * @param item The item to vend
      * @return True if the item was vended successfully.
      */
-    boolean vendInventory( VendableItem item )
+    public boolean vendInventory( VendableItem item )
     {
         if ( !hasInventory( item ) )
         {
