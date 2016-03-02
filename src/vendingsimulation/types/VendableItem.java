@@ -11,7 +11,7 @@ public interface VendableItem
      * The cost of the item
      * @return A Big Decimal representing the cost of the item
      */
-    BigDecimal GetCostInUSD();
+    BigDecimal GetCost();
     /**
      * Get the name of the item
      * @return A string representing the name of the item.

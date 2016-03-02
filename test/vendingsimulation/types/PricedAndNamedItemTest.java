@@ -78,39 +78,39 @@ public class PricedAndNamedItemTest {
      * Tests the PricedAndNamedItem handles 0 as its price
      */
     @Test
-    public void testGetCostInUSDHandles0()
+    public void testGetCostHandles0()
     {
-        System.out.println("testGetCostInUSDHandles0");
+        System.out.println("testGetCostHandles0");
         String name = "Test";
         BigDecimal test_val = new BigDecimal(0.00);
         PricedAndNamedItem item = new PricedAndNamedItem( test_val, name );
-        assertEquals(test_val, item.GetCostInUSD() );
+        assertEquals(test_val, item.GetCost() );
     }
     
     /**
      * Tests the PriceAndNameditem does not allow negative numbers
      */
     @Test
-    public void testGetCostInUSDRefusesNegatives()
+    public void testGetCostRefusesNegatives()
     {
-        System.out.println("testGetCostInUSDHandles0");
+        System.out.println("testGetCostRefusesNegatives");
         String name = "Test";
         BigDecimal test_val = new BigDecimal(-1.00);
         PricedAndNamedItem item = new PricedAndNamedItem( test_val, name );
-        assertEquals(new BigDecimal(0.00), item.GetCostInUSD() );
+        assertEquals(new BigDecimal(0.00), item.GetCost() );
     }
     
     /**
      * Tests the PriceAndNameditem handles positive numbers
      */
     @Test
-    public void testGetCostInUSDAllowsPositives()
+    public void testGetCostAllowsPositives()
     {
-        System.out.println("testGetCostInUSDAllowsPositives");
+        System.out.println("testGetCostAllowsPositives");
         String name = "Test";
         BigDecimal test_val = new BigDecimal(25.00);
         PricedAndNamedItem item = new PricedAndNamedItem( test_val, name );
-        assertEquals(test_val, item.GetCostInUSD() );
+        assertEquals(test_val, item.GetCost() );
     }
     
 }

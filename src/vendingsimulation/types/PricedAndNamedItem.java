@@ -23,10 +23,10 @@ public class PricedAndNamedItem implements VendableItem
     }
     
     /**
-     * Returns the cost in US dollars of this item
-     * @return A big decimal representing the USD cost of this item
+     * Returns the cost of this item
+     * @return A big decimal representing the cost of this item
      */
-    public BigDecimal GetCostInUSD()
+    public BigDecimal GetCost()
     {
         return m_cost;
     }

@@ -18,9 +18,15 @@ public class StubMainDialogModel implements MainDialogModel
     public boolean m_handled_change_returned = false;
     public boolean m_handled_inactive_state = false;
     
+    public StubMainDialogModel()
+    {
+        
+    }
+    
     public void itemRequested( VendableItem item )
     {   
     }
+    
     public void setController( MainDialogController controller )
     { 
     }
@@ -54,7 +60,7 @@ public class StubMainDialogModel implements MainDialogModel
     
     public void handleItemDispensed( VendableItem item )
     {
-        
+        m_handled_item_dispensed = true;
     }
     
     public void handleChangeReturned( Vector<Credit> coins )
