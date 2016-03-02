@@ -23,4 +23,14 @@ public class StubChangeMaker implements ChangeMaker
         m_asked_to_give_change = true;
         return true;
     }
+    
+    public boolean creditInserted( BigDecimal voltage )
+    {
+        return true;
+    }
+    
+    public void creditsSpent()
+    {
+        
+    }
 }
