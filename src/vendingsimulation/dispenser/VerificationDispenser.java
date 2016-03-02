@@ -55,11 +55,11 @@ public class VerificationDispenser implements Dispenser
             return CommonIncludes.DispensingReturns.OUT_OF_STOCK;
         }
         else if ( !m_current_credits.hasEnoughCredits( 
-            item.GetCostInUSD() ) )
+            item.GetCost() ) )
         {
             return CommonIncludes.DispensingReturns.NOT_ENOUGH_MONEY;
         }
-        else if ( !m_change_maker.canMakeChange( item.GetCostInUSD() ) )
+        else if ( !m_change_maker.canMakeChange( item.GetCost() ) )
         {
             return CommonIncludes.DispensingReturns.EXACT_CHANGE_NEEDED;
         }
@@ -69,7 +69,7 @@ public class VerificationDispenser implements Dispenser
             {
                 if ( m_change_maker.returnChange( 
                     m_current_credits.getCurrentCredits().
-                        subtract(item.GetCostInUSD()) ) )
+                        subtract(item.GetCost()) ) )
                 {
                     m_current_credits.creditsSpent();
                     return CommonIncludes.DispensingReturns.SUCCESSFUL_VEND;
