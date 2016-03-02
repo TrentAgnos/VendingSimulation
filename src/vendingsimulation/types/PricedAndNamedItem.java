@@ -8,8 +8,8 @@ import java.math.BigDecimal;
  */
 public class PricedAndNamedItem implements VendableItem
 {
-    BigDecimal m_cost;
-    String m_name;
+    private BigDecimal m_cost;
+    private String m_name;
     
     /**
      * Constructor
