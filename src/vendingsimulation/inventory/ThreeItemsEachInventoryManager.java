@@ -3,6 +3,7 @@ package vendingsimulation.inventory;
 import java.math.BigDecimal;
 import java.util.concurrent.ConcurrentSkipListMap;
 
+import vendingsimulation.common.CommonIncludes;
 import vendingsimulation.displayui.MainDialogModel;
 import vendingsimulation.types.PricedAndNamedItem;
 import vendingsimulation.types.VendableItem;
@@ -41,11 +42,11 @@ public class ThreeItemsEachInventoryManager
         m_model = model;
         m_inventory_storage = new ConcurrentSkipListMap<String, Integer>();
         PricedAndNamedItem cola = new PricedAndNamedItem( 
-            new BigDecimal( 1.00 ), "cola" );
+            CommonIncludes.COST_OF_COLA, CommonIncludes.COLA_NAME );
         PricedAndNamedItem candy = new PricedAndNamedItem( 
-            new BigDecimal( 0.65 ), "candy" );
+            CommonIncludes.COST_OF_CANDY, CommonIncludes.CANDY_NAME );
         PricedAndNamedItem chips = new PricedAndNamedItem( 
-            new BigDecimal( 0.50 ), "chips" );
+            CommonIncludes.COST_OF_CHIPS, CommonIncludes.CHIPS_NAME );
         m_inventory_storage.put( cola.GetName(), storage_space );
         m_inventory_storage.put( candy.GetName(), storage_space );
         m_inventory_storage.put( chips.GetName(), storage_space );

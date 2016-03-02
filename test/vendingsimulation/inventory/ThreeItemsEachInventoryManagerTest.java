@@ -10,6 +10,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import java.math.BigDecimal;
 
+import vendingsimulation.common.CommonIncludes;
 import vendingsimulation.displayui.stubs.StubMainDialogModel;
 import vendingsimulation.types.PricedAndNamedItem;
 
@@ -29,9 +30,12 @@ public class ThreeItemsEachInventoryManagerTest {
     {
         dialog = new StubMainDialogModel();
         manager = new ThreeItemsEachInventoryManager( dialog );
-        cola = new PricedAndNamedItem( new BigDecimal( 1.00 ), "cola" );
-        candy = new PricedAndNamedItem( new BigDecimal( 0.65 ), "candy" );
-        chips = new PricedAndNamedItem( new BigDecimal( 1.00 ), "chips" );
+        cola = new PricedAndNamedItem( 
+            CommonIncludes.COST_OF_COLA, CommonIncludes.COLA_NAME );
+        candy = new PricedAndNamedItem( 
+            CommonIncludes.COST_OF_CANDY, CommonIncludes.CANDY_NAME );
+        chips = new PricedAndNamedItem( 
+            CommonIncludes.COST_OF_CHIPS, CommonIncludes.CHIPS_NAME );
     }
 
     /**
