@@ -1,6 +1,7 @@
 package vendingsimulation.common;
 
 import java.math.BigDecimal;
+import vendingsimulation.types.USDCredit;
 
 /**
  * Common enums and defines
@@ -23,7 +24,6 @@ public class CommonIncludes
      */
     public enum CreditInsertedReturns
     {
-        STORAGE_FULL,
         UNSUPPORTED_TYPE,
         SUCCESS
     }
@@ -47,5 +47,14 @@ public class CommonIncludes
     public final static BigDecimal VALUE_OF_DIME = new BigDecimal( 0.10 );
     public final static BigDecimal VALUE_OF_QUARTER = new BigDecimal( 0.25 );
     public final static BigDecimal VALUE_OF_PENNY = new BigDecimal( 0.01 );
+    
+    public final static USDCredit PENNY = new USDCredit( PENNY_NAME, 
+        VALUE_OF_PENNY );
+    public final static USDCredit NICKEL = new USDCredit( NICKEL_NAME, 
+        VALUE_OF_NICKEL );
+    public final static USDCredit DIME = new USDCredit( DIME_NAME, 
+        VALUE_OF_DIME );
+    public final static USDCredit QUARTER = new USDCredit( QUARTER_NAME, 
+        VALUE_OF_QUARTER );
 }
 

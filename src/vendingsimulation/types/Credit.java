@@ -3,7 +3,7 @@ package vendingsimulation.types;
 import java.math.BigDecimal;
 
 
-public abstract class Credit 
+public abstract class Credit implements Comparable<Credit>
 {
     /**
      * Returns the name of the credit
@@ -32,5 +32,15 @@ public abstract class Credit
         return this.getName().equals(other.getName() ) &&
                 this.getValue().equals(other.getValue() ) &&
                 this.getMonetarySystem().equals(other.getMonetarySystem() );
+    }
+    
+    /**
+     * Reimplemented compareTo method
+     * @param other Class to compare
+     * @return 
+     */
+    public int compareTo( Credit other) 
+    {
+        return this.getValue().compareTo( other.getValue() );
     }
 }

@@ -6,6 +6,7 @@
 package vendingsimulation.displayui;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Vector;
 
 import vendingsimulation.common.CommonIncludes;
@@ -64,7 +65,7 @@ public class MainDialogDispenserModel implements MainDialogModel
      */
     public void itemRequested( VendableItem item )
     {
-        handleDispenseReturn( m_dispenser.dispenseItem( item ) );
+        handleDispenseReturn( m_dispenser.dispenseItem( item ), item );
     }
     
     /**
@@ -76,7 +77,8 @@ public class MainDialogDispenserModel implements MainDialogModel
     {
         m_reader.newVoltage( voltage_from_credit_reader );
         m_controller.setDisplayText( 
-            m_cur_credits.getCurrentCredits().toString() );
+            m_cur_credits.getCurrentCredits().setScale(2, RoundingMode.HALF_UP).
+                toString() );
         
     }
     
@@ -156,13 +158,14 @@ public class MainDialogDispenserModel implements MainDialogModel
     }
     
     private void handleDispenseReturn( CommonIncludes.DispensingReturns 
-        dispense_return )
+        dispense_return, VendableItem item )
     {
         switch( dispense_return )
         {
             case NOT_ENOUGH_MONEY:
             {
-                /// TODO handle not enough money
+                m_controller.setDisplayText( String.format("Price %s", 
+                    item.getCost().setScale( 2, RoundingMode.HALF_UP ) ) );
                 break;
             }
             case OUT_OF_STOCK:
@@ -173,7 +176,7 @@ public class MainDialogDispenserModel implements MainDialogModel
             }
             case EXACT_CHANGE_NEEDED:
             {
-                /// TODO handle not enough money
+                m_controller.setDisplayText("Exact Change Needed");
                 break;
             }
             case SUCCESSFUL_VEND:
