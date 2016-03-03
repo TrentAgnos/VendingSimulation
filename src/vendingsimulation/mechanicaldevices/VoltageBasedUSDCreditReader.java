@@ -91,8 +91,6 @@ public class VoltageBasedUSDCreditReader implements CreditReader
             credit = new UnknownCredit();
         }
         
-        System.out.println( String.format("Credit value %s", credit.getValue().toString() ) );
-        
         if ( m_change_maker.creditInserted( credit ) == 
             CommonIncludes.CreditInsertedReturns.SUCCESS )
         {
