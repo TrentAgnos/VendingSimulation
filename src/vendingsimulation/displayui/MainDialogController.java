@@ -9,6 +9,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import java.util.ResourceBundle;
 
+import vendingsimulation.common.CommonIncludes;
+import vendingsimulation.displayui.MainDialogModel;
+import vendingsimulation.types.VendableItem;
+import vendingsimulation.types.PricedAndNamedItem;
+
 /**
  * Controller class for the main dialog UI.
  */
@@ -22,6 +27,8 @@ public class MainDialogController implements Initializable
     @FXML private ChoiceBox choiceBoxCoins;
     @FXML private Label labelCoinSlot;
     @FXML private Label labelDisplay;
+    
+    private MainDialogModel m_model;
 
     /**
      * Constructor
@@ -43,6 +50,17 @@ public class MainDialogController implements Initializable
             "Half Dollar", "Euro");
         choiceBoxCoins.getSelectionModel().selectFirst();
     }  
+    
+    /**
+     * Late construction to add the model for this controller.
+     * TODO find some way to manually construct the controller 
+     * instead of letting JavaFx do it so I can pass extra arguments.
+     * @param model The model for this controller.
+     */
+    public void setModel( MainDialogModel model )
+    {
+        m_model = model;
+    }
     
     /**
      * Set the display output to the user
@@ -79,7 +97,12 @@ public class MainDialogController implements Initializable
     @FXML
     private void handleButtonCandy(ActionEvent event) 
     {
-        // TODO send request to model
+        if ( m_model != null )
+        {
+            VendableItem item = new PricedAndNamedItem( 
+                CommonIncludes.COST_OF_CANDY, CommonIncludes.CANDY_NAME );
+            m_model.itemRequested( item );
+        }
     }
     
     /**
@@ -89,7 +112,12 @@ public class MainDialogController implements Initializable
     @FXML
     private void handleButtonChips(ActionEvent event)
     {
-        // TODO send request to model
+        if ( m_model != null )
+        {
+            VendableItem item = new PricedAndNamedItem( 
+                CommonIncludes.COST_OF_CHIPS, CommonIncludes.CHIPS_NAME );
+            m_model.itemRequested( item );
+        }
     }
     
     /**
@@ -99,7 +127,12 @@ public class MainDialogController implements Initializable
     @FXML
     private void handleButtonCola(ActionEvent event)
     {
-        // TODO send request to model
+        if ( m_model != null )
+        {
+            VendableItem item = new PricedAndNamedItem( 
+                CommonIncludes.COST_OF_COLA, CommonIncludes.COLA_NAME );
+            m_model.itemRequested( item );
+        }
     }
     
     /**

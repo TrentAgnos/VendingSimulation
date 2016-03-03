@@ -1,10 +1,11 @@
 package vendingsimulation.inventory;
 
-import java.math.BigDecimal;
 import java.util.concurrent.ConcurrentSkipListMap;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 import vendingsimulation.common.CommonIncludes;
-import vendingsimulation.displayui.MainDialogModel;
+import vendingsimulation.mechanicaldevices.ItemVender;
 import vendingsimulation.types.PricedAndNamedItem;
 import vendingsimulation.types.VendableItem;
 
@@ -18,16 +19,15 @@ import vendingsimulation.types.VendableItem;
 public class ThreeItemsEachInventoryManager implements InventoryManager
 {
     /**
-     * The main dialog mode. Used to pop up a message on the UI
-     * that an item was dispensed. 
-     */
-    private MainDialogModel m_model;
-    /**
      * Storage representation for the inventory.
      * Concurrent map was chosen because in a real system
      * this would be an RTOS task looping on update on some register
      */
     private ConcurrentSkipListMap<String, Integer> m_inventory_storage;
+    /**
+     * The class responsible for physically vending the item
+     */
+    private ItemVender m_item_vender;
     /**
      * The storage space for each item
      */
@@ -35,11 +35,10 @@ public class ThreeItemsEachInventoryManager implements InventoryManager
     
     /**
      * Constructor
-     * @param model Model of the main dialog
      */
-    public ThreeItemsEachInventoryManager( MainDialogModel model )
+    public ThreeItemsEachInventoryManager( ItemVender item_vender )
     {
-        m_model = model;
+        m_item_vender = item_vender;
         m_inventory_storage = new ConcurrentSkipListMap<String, Integer>();
         PricedAndNamedItem cola = new PricedAndNamedItem( 
             CommonIncludes.COST_OF_COLA, CommonIncludes.COLA_NAME );
@@ -57,6 +56,7 @@ public class ThreeItemsEachInventoryManager implements InventoryManager
      * @param item  The item to check 
      * @return True if the item is in stock
      */
+    @Override
     public boolean hasInventory( VendableItem item )
     {
         Integer val = m_inventory_storage.get( item.GetName() );
@@ -75,6 +75,7 @@ public class ThreeItemsEachInventoryManager implements InventoryManager
      * @param item The item to vend
      * @return True if the item was vended successfully.
      */
+    @Override
     public boolean vendInventory( VendableItem item )
     {
         if ( !hasInventory( item ) )
@@ -83,10 +84,13 @@ public class ThreeItemsEachInventoryManager implements InventoryManager
         }
         else
         {
+            m_item_vender.vendItem( item );
             Integer val = m_inventory_storage.get( item.GetName() );
             m_inventory_storage.put( item.GetName() , --val );
-            m_model.handleItemDispensed( item );
             return true;
         }
     }
+    
+    
+    
 }
