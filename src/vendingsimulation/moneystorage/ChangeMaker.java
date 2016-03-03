@@ -38,4 +38,9 @@ public interface ChangeMaker
      * considered owned by the machine
      */
     void creditsSpent();
+    
+    /**
+     * Return the customer all inserted but unspent credits
+     */
+    void ejectUnspentMoney();
 }

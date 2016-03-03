@@ -12,6 +12,7 @@ import java.util.Vector;
 import vendingsimulation.common.CommonIncludes;
 import vendingsimulation.dispenser.Dispenser;
 import vendingsimulation.mechanicaldevices.CreditReader;
+import vendingsimulation.moneystorage.ChangeMaker;
 import vendingsimulation.moneystorage.CurrentCredits;
 import vendingsimulation.types.Credit;
 import vendingsimulation.types.VendableItem;
@@ -40,6 +41,7 @@ public class MainDialogDispenserModel implements MainDialogModel
      * I only have a UI. So I place it here to send the voltage from the UI.
      */
     CreditReader m_reader;
+    ChangeMaker m_change_maker;
     
     /**
      * Constructor
@@ -51,12 +53,13 @@ public class MainDialogDispenserModel implements MainDialogModel
      */
     public MainDialogDispenserModel( Dispenser dispenser, 
         MainDialogController controller, CurrentCredits cur_credits,
-        CreditReader reader )
+        CreditReader reader, ChangeMaker change_maker )
     {
         m_dispenser = dispenser;
         m_controller = controller;
         m_cur_credits = cur_credits;
         m_reader = reader;
+        m_change_maker = change_maker;
     }
     
     /**
@@ -87,26 +90,8 @@ public class MainDialogDispenserModel implements MainDialogModel
      */
     public void ejectUnspentMoney()
     {
-        
-    }
-    
-    /**
-     * Handle when an item was requested but the customer has not
-     * inserted enough credits.
-     * @param item The item that was requested.
-     */
-    public void handleNotEnoughMoney( VendableItem item )
-    {
-        
-    }
-    
-    /**
-     * Handle when an item was requested but the item is out of stock
-     * @param item The item that was requested.
-     */
-    public void handleOutOfStock( VendableItem item )
-    {
-        
+        m_change_maker.ejectUnspentMoney();
+        handleInactiveState();
     }
     
     /**
@@ -154,7 +139,7 @@ public class MainDialogDispenserModel implements MainDialogModel
      */
     public void handleInactiveState()
     {
-        
+        m_controller.setDisplayText("Insert coins");
     }
     
     private void handleDispenseReturn( CommonIncludes.DispensingReturns 
@@ -182,7 +167,7 @@ public class MainDialogDispenserModel implements MainDialogModel
             case SUCCESSFUL_VEND:
             {
                 /// TODO translations
-                m_controller.setDisplayText("Thank you.");
+                m_controller.setDisplayText("Thank you");
                 break;
             }
         }

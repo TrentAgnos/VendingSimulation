@@ -50,9 +50,9 @@ public class VendingSimulation  extends Application
             (MainDialogController)loader.getController();
         
         CreditReturn credit_return = new MessageDialogCreditReturn();
-        ChangeMaker change_maker = new NickelDimeQuarterChangeMaker( 
-            credit_return );
         CurrentCredits cur_credits = new USDCurrentCredits();
+        ChangeMaker change_maker = new NickelDimeQuarterChangeMaker( 
+            credit_return, cur_credits );
         ItemVender vender = new MessageDialogItemVender();
         InventoryManager inven_manager = new ThreeItemsEachInventoryManager( 
             vender );
@@ -62,7 +62,7 @@ public class VendingSimulation  extends Application
         Dispenser dispenser = new VerificationDispenser( change_maker,
             cur_credits, inven_manager );
         MainDialogModel model = new MainDialogDispenserModel( 
-            dispenser, controller, cur_credits, reader );
+            dispenser, controller, cur_credits, reader, change_maker );
         
         controller.setModel( model );
         

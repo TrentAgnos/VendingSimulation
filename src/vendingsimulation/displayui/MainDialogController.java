@@ -174,8 +174,7 @@ public class MainDialogController implements Initializable
     @FXML
     private void handleButtonEjectUnspentMoney(ActionEvent event)
     {
-        // TODO send request to eject money when no purchase
-        // has been made
+        m_model.ejectUnspentMoney();
     }
 }
 

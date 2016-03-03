@@ -39,11 +39,15 @@ public class NickelDimeQuarterChangeMaker implements ChangeMaker
     private int m_num_unspent_dimes = 0;
     private int m_num_unspent_quarters = 0;
     
+    CurrentCredits m_current_credits;
+    
     CreditReturn m_credit_return;
     
-    public NickelDimeQuarterChangeMaker( CreditReturn credit_return )
+    public NickelDimeQuarterChangeMaker( CreditReturn credit_return,
+        CurrentCredits current_credits )
     {
         m_credit_return = credit_return;
+        m_current_credits = current_credits;
     }
     
     /**
@@ -130,6 +134,19 @@ public class NickelDimeQuarterChangeMaker implements ChangeMaker
         m_num_unspent_quarters = 0;
         m_num_unspent_dimes = 0;
         m_num_unspent_nickels = 0;
+    }
+    
+    public void ejectUnspentMoney()
+    {
+        ChangeTuple change_tuple = new ChangeTuple();
+        change_tuple.num_dimes = m_num_unspent_dimes;
+        change_tuple.num_nickels = m_num_unspent_nickels;
+        change_tuple.num_quarters = m_num_unspent_quarters;
+        change_tuple.could_make_change = true;    
+        m_credit_return.returnCredits( 
+                buildTreepFromTuple( change_tuple )  );
+        creditsSpent();
+        m_current_credits.creditsSpent();
     }
     
     /**
