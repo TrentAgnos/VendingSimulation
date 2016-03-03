@@ -28,6 +28,7 @@ public class MainDialogController implements Initializable
     @FXML private ChoiceBox choiceBoxCoins;
     @FXML private Label labelCoinSlot;
     @FXML private Label labelDisplay;
+    @FXML private Label labelExactChangeNeeded;
     
     private MainDialogModel m_model;
 
@@ -69,6 +70,15 @@ public class MainDialogController implements Initializable
     public void setDisplayText( String text )
     {
         labelDisplay.setText(text);
+    }
+    
+    /**
+     * Set the exact change label
+     * @param text The text to set on the label
+     */
+    public void setExactChangeText( String text )
+    {
+        labelExactChangeNeeded.setText( text );
     }
     
     /**
@@ -174,8 +184,7 @@ public class MainDialogController implements Initializable
     @FXML
     private void handleButtonEjectUnspentMoney(ActionEvent event)
     {
-        // TODO send request to eject money when no purchase
-        // has been made
+        m_model.ejectUnspentMoney();
     }
 }
 

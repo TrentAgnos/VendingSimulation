@@ -14,11 +14,14 @@ import vendingsimulation.displayui.MainDialogModel;
 import vendingsimulation.inventory.InventoryManager;
 import vendingsimulation.inventory.ThreeItemsEachInventoryManager;
 import vendingsimulation.mechanicaldevices.CreditReader;
+import vendingsimulation.mechanicaldevices.CreditReturn;
 import vendingsimulation.mechanicaldevices.ItemVender;
+import vendingsimulation.mechanicaldevices.MessageDialogCreditReturn;
 import vendingsimulation.mechanicaldevices.MessageDialogItemVender;
 import vendingsimulation.mechanicaldevices.VoltageBasedUSDCreditReader;
 import vendingsimulation.moneystorage.ChangeMaker;
 import vendingsimulation.moneystorage.CurrentCredits;
+import vendingsimulation.moneystorage.NickelDimeQuarterChangeMaker;
 import vendingsimulation.moneystorage.USDCurrentCredits;
 import vendingsimulation.moneystorage.stubs.StubChangeMaker;
 
@@ -46,8 +49,10 @@ public class VendingSimulation  extends Application
         MainDialogController controller = 
             (MainDialogController)loader.getController();
         
-        ChangeMaker change_maker = new StubChangeMaker();
+        CreditReturn credit_return = new MessageDialogCreditReturn();
         CurrentCredits cur_credits = new USDCurrentCredits();
+        ChangeMaker change_maker = new NickelDimeQuarterChangeMaker( 
+            credit_return, cur_credits );
         ItemVender vender = new MessageDialogItemVender();
         InventoryManager inven_manager = new ThreeItemsEachInventoryManager( 
             vender );
@@ -57,7 +62,7 @@ public class VendingSimulation  extends Application
         Dispenser dispenser = new VerificationDispenser( change_maker,
             cur_credits, inven_manager );
         MainDialogModel model = new MainDialogDispenserModel( 
-            dispenser, controller, cur_credits, reader );
+            dispenser, controller, cur_credits, reader, change_maker );
         
         controller.setModel( model );
         

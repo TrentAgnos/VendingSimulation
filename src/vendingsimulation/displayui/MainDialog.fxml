@@ -20,5 +20,6 @@
       </Label>
       <Button fx:id="buttonEjectUnspentMoney" layoutX="430.0" layoutY="224.0" mnemonicParsing="false" onAction="#handleButtonEjectUnspentMoney" prefHeight="25.0" prefWidth="150.0" text="Eject Unspent Money" />
       <Button fx:id="buttonInsertCoin" layoutX="429.0" layoutY="160.0" mnemonicParsing="false" onAction="#handleButtonInsertCoin" prefHeight="25.0" prefWidth="150.0" text="Insert Coin" />
+      <Label fx:id="labelExactChangeNeeded" layoutX="432.0" layoutY="57.0" prefHeight="53.0" prefWidth="150.0" textAlignment="CENTER" />
    </children>
 </AnchorPane>

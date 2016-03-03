@@ -38,4 +38,14 @@ public class StubChangeMaker implements ChangeMaker
     {
         
     }
+    
+    public void ejectUnspentMoney()
+    {
+        
+    }
+    
+    public boolean checkIfExactChangeNeeded()
+    {
+        return false;
+    }
 }

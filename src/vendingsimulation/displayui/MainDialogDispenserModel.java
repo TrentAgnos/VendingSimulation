@@ -6,11 +6,13 @@
 package vendingsimulation.displayui;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Vector;
 
 import vendingsimulation.common.CommonIncludes;
 import vendingsimulation.dispenser.Dispenser;
 import vendingsimulation.mechanicaldevices.CreditReader;
+import vendingsimulation.moneystorage.ChangeMaker;
 import vendingsimulation.moneystorage.CurrentCredits;
 import vendingsimulation.types.Credit;
 import vendingsimulation.types.VendableItem;
@@ -39,6 +41,7 @@ public class MainDialogDispenserModel implements MainDialogModel
      * I only have a UI. So I place it here to send the voltage from the UI.
      */
     CreditReader m_reader;
+    ChangeMaker m_change_maker;
     
     /**
      * Constructor
@@ -50,12 +53,19 @@ public class MainDialogDispenserModel implements MainDialogModel
      */
     public MainDialogDispenserModel( Dispenser dispenser, 
         MainDialogController controller, CurrentCredits cur_credits,
-        CreditReader reader )
+        CreditReader reader, ChangeMaker change_maker )
     {
         m_dispenser = dispenser;
         m_controller = controller;
         m_cur_credits = cur_credits;
         m_reader = reader;
+        m_change_maker = change_maker;
+        
+        if ( m_change_maker.checkIfExactChangeNeeded() )
+        {
+            handleExactChangeNeeded();
+        }
+        
     }
     
     /**
@@ -64,7 +74,11 @@ public class MainDialogDispenserModel implements MainDialogModel
      */
     public void itemRequested( VendableItem item )
     {
-        handleDispenseReturn( m_dispenser.dispenseItem( item ) );
+        handleDispenseReturn( m_dispenser.dispenseItem( item ), item );
+        if ( m_change_maker.checkIfExactChangeNeeded() )
+        {
+            handleExactChangeNeeded();
+        }
     }
     
     /**
@@ -76,7 +90,8 @@ public class MainDialogDispenserModel implements MainDialogModel
     {
         m_reader.newVoltage( voltage_from_credit_reader );
         m_controller.setDisplayText( 
-            m_cur_credits.getCurrentCredits().toString() );
+            m_cur_credits.getCurrentCredits().setScale(2, RoundingMode.HALF_UP).
+                toString() );
         
     }
     
@@ -85,26 +100,8 @@ public class MainDialogDispenserModel implements MainDialogModel
      */
     public void ejectUnspentMoney()
     {
-        
-    }
-    
-    /**
-     * Handle when an item was requested but the customer has not
-     * inserted enough credits.
-     * @param item The item that was requested.
-     */
-    public void handleNotEnoughMoney( VendableItem item )
-    {
-        
-    }
-    
-    /**
-     * Handle when an item was requested but the item is out of stock
-     * @param item The item that was requested.
-     */
-    public void handleOutOfStock( VendableItem item )
-    {
-        
+        m_change_maker.ejectUnspentMoney();
+        handleInactiveState();
     }
     
     /**
@@ -114,7 +111,7 @@ public class MainDialogDispenserModel implements MainDialogModel
      */
     public void handleExactChangeNeeded()
     {
-        
+        m_controller.setExactChangeText( "Exact Change Needed" );
     }
     
     /**
@@ -152,17 +149,18 @@ public class MainDialogDispenserModel implements MainDialogModel
      */
     public void handleInactiveState()
     {
-        
+        m_controller.setDisplayText("Insert coins");
     }
     
     private void handleDispenseReturn( CommonIncludes.DispensingReturns 
-        dispense_return )
+        dispense_return, VendableItem item )
     {
         switch( dispense_return )
         {
             case NOT_ENOUGH_MONEY:
             {
-                /// TODO handle not enough money
+                m_controller.setDisplayText( String.format("Price %s", 
+                    item.getCost().setScale( 2, RoundingMode.HALF_UP ) ) );
                 break;
             }
             case OUT_OF_STOCK:
@@ -173,13 +171,13 @@ public class MainDialogDispenserModel implements MainDialogModel
             }
             case EXACT_CHANGE_NEEDED:
             {
-                /// TODO handle not enough money
+                m_controller.setDisplayText("Exact Change Needed");
                 break;
             }
             case SUCCESSFUL_VEND:
             {
                 /// TODO translations
-                m_controller.setDisplayText("Thank you.");
+                m_controller.setDisplayText("Thank you");
                 break;
             }
         }

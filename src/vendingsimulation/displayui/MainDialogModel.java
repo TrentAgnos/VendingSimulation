@@ -28,19 +28,6 @@ public interface MainDialogModel
     void ejectUnspentMoney();
     
     /**
-     * Handle when an item was requested but the customer has not
-     * inserted enough credits.
-     * @param item The item that was requested.
-     */
-    void handleNotEnoughMoney( VendableItem item );
-    
-    /**
-     * Handle when an item was requested but the item is out of stock
-     * @param item The item that was requested.
-     */
-    void handleOutOfStock( VendableItem item );
-    
-    /**
      * Handle when an item was requested but the user did not insert
      * exactly the cost of the item while the machine required
      * exact change.
