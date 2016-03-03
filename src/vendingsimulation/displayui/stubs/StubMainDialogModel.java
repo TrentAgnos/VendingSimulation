@@ -27,7 +27,7 @@ public class StubMainDialogModel implements MainDialogModel
     {   
     }
     
-    public void creditInserted( double voltage_from_credit_reader )
+    public void creditInserted( BigDecimal voltage_from_credit_reader )
     { 
     }
     
