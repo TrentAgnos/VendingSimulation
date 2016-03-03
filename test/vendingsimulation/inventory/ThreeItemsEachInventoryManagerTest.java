@@ -10,7 +10,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import java.math.BigDecimal;
 
-import vendingsimulation.displayui.stubs.StubMainDialogModel;
+import vendingsimulation.common.CommonIncludes;
+import vendingsimulation.mechanicaldevices.stubs.StubItemVender;
 import vendingsimulation.types.PricedAndNamedItem;
 
 /**
@@ -21,17 +22,20 @@ public class ThreeItemsEachInventoryManagerTest {
     PricedAndNamedItem cola;
     PricedAndNamedItem candy;
     PricedAndNamedItem chips;
-    StubMainDialogModel dialog;
     ThreeItemsEachInventoryManager manager;
+    StubItemVender vender;
     
     @Before
     public void setUp() 
     {
-        dialog = new StubMainDialogModel();
-        manager = new ThreeItemsEachInventoryManager( dialog );
-        cola = new PricedAndNamedItem( new BigDecimal( 1.00 ), "cola" );
-        candy = new PricedAndNamedItem( new BigDecimal( 0.65 ), "candy" );
-        chips = new PricedAndNamedItem( new BigDecimal( 1.00 ), "chips" );
+        vender = new StubItemVender();
+        manager = new ThreeItemsEachInventoryManager( vender );
+        cola = new PricedAndNamedItem( 
+            CommonIncludes.COST_OF_COLA, CommonIncludes.COLA_NAME );
+        candy = new PricedAndNamedItem( 
+            CommonIncludes.COST_OF_CANDY, CommonIncludes.CANDY_NAME );
+        chips = new PricedAndNamedItem( 
+            CommonIncludes.COST_OF_CHIPS, CommonIncludes.CHIPS_NAME );
     }
 
     /**
@@ -85,35 +89,31 @@ public class ThreeItemsEachInventoryManagerTest {
     }
     
     /**
-     * Test the UI is updated when an item is dispensed
+     * Test the inventory manager vends items when in stock
      */
     @Test
-    public void testSendsHandleItemDispensedToUI()
+    public void testDoesVend()
     {
-        System.out.println("testSendsHandleItemDispensedToUI");
+        System.out.println("testDoesVend");
         assertTrue( manager.vendInventory( cola ) );
-        assertTrue( dialog.m_handled_item_dispensed );
+        assertTrue( vender.m_vended );
     }
     
     /**
-     * Test the UI is not updated when an item is not dispensed
-     * because it is out of stock
+     * Test the inventory manager does not vend items when out of stock
      */
     @Test
-    public void testDoesNotSendHandleItemDispensedToUIWhenOutOfInventory()
+    public void testDoesNotVendWhenOutOfInventory()
     {
-        System.out.
-            println("testDoesNotSendHandleItemDispensedToUIWhenOutOfInventory");
+        System.out.println("testDoesVend");
         assertTrue( manager.vendInventory( cola ) );
         assertTrue( manager.vendInventory( cola ) );
         assertTrue( manager.vendInventory( cola ) );
         
-        // Reset the state before the last vend
-        dialog.m_handled_item_dispensed = false;
+        // Reset vender stub state
+        vender.m_vended = false;
         
         assertFalse( manager.vendInventory( cola ) );
-        assertFalse( manager.hasInventory( cola ) );
-        assertFalse( dialog.m_handled_item_dispensed );
+        assertFalse( vender.m_vended );
     }
-    
 }

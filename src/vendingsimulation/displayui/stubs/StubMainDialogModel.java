@@ -27,11 +27,7 @@ public class StubMainDialogModel implements MainDialogModel
     {   
     }
     
-    public void setController( MainDialogController controller )
-    { 
-    }
-    
-    public void coinInserted( double voltage_from_coin_reader )
+    public void creditInserted( double voltage_from_credit_reader )
     { 
     }
     
