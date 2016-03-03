@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 
 import vendingsimulation.common.CommonIncludes;
 import vendingsimulation.displayui.MainDialogModel;
+import vendingsimulation.mechanicaldevices.VoltageBasedUSDCreditReader;
 import vendingsimulation.types.VendableItem;
 import vendingsimulation.types.PricedAndNamedItem;
 
@@ -46,8 +47,7 @@ public class MainDialogController implements Initializable
     public void initialize(URL url, ResourceBundle rb) {
         // TODO replace this with a separate file holding the supported
         // insert types and translations.
-        choiceBoxCoins.getItems().addAll("Penny", "Nickel", "Dime", "Quarter", 
-            "Half Dollar", "Euro");
+        choiceBoxCoins.getItems().addAll("Penny", "Nickel", "Dime", "Quarter");
         choiceBoxCoins.getSelectionModel().selectFirst();
     }  
     
@@ -142,9 +142,33 @@ public class MainDialogController implements Initializable
     @FXML
     private void handleButtonInsertCoin(ActionEvent event)
     {
-        // TODO Grab the coin type from the choice box and send model a 
-        // voltage representing a specific coin.
-        // add class to do those conversions    
+        // Again this is all a weird way to get around the fact
+        // that I dont have hardware to poll
+        if ( m_model != null )
+        {
+            String choice = 
+                choiceBoxCoins.getSelectionModel().getSelectedItem().toString();
+            if ( choice.equals("Penny") )
+            {
+                m_model.creditInserted( 
+                    VoltageBasedUSDCreditReader.VOLTAGE_FOR_PENNY );
+            }
+            else if ( choice.equals("Nickel") )
+            {
+                m_model.creditInserted( 
+                    VoltageBasedUSDCreditReader.VOLTAGE_FOR_NICKEL );
+            }
+            else if ( choice.equals("Dime") )
+            {
+                m_model.creditInserted( 
+                    VoltageBasedUSDCreditReader.VOLTAGE_FOR_DIME );
+            }
+            else if ( choice.equals("Quarter") )
+            {
+                m_model.creditInserted( 
+                    VoltageBasedUSDCreditReader.VOLTAGE_FOR_QUARTER );
+            }
+        }
     }
     
     @FXML
