@@ -16,7 +16,7 @@ public class USDCredit implements Credit
     /**
      * The name of the monetary system this credit is a part of.
      */
-    private final static String m_monetary_system = "USD";
+    public final static String MONETARY_SYSTEM = "USD";
     /**
      * The value of this credit in its monetary system
      */
@@ -57,6 +57,6 @@ public class USDCredit implements Credit
      */
     public String GetMonetarySystem()
     {
-        return m_monetary_system;
+        return MONETARY_SYSTEM;
     }
 }
