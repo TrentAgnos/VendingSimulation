@@ -32,7 +32,7 @@ public class PricedAndNamedItemTest {
         String name = "Random";
         BigDecimal test_val = new BigDecimal(1.00);
         PricedAndNamedItem item = new PricedAndNamedItem( test_val, name );
-        assertEquals(name, item.GetName() );
+        assertEquals(name, item.getName() );
     }
     
     /**
@@ -45,7 +45,7 @@ public class PricedAndNamedItemTest {
         String name = "";
         BigDecimal test_val = new BigDecimal(1.00);
         PricedAndNamedItem item = new PricedAndNamedItem( test_val, name );
-        assertEquals(name, item.GetName() );
+        assertEquals(name, item.getName() );
     }
     
     /**
@@ -58,7 +58,7 @@ public class PricedAndNamedItemTest {
         String name = "dddddddddsdfsdfasdfasdfsadfasdfasdfasdfasdfasfdasdfasdf";
         BigDecimal test_val = new BigDecimal(1.00);
         PricedAndNamedItem item = new PricedAndNamedItem( test_val, name );
-        assertEquals(name, item.GetName() );
+        assertEquals(name, item.getName() );
     }
     
     /**
@@ -71,7 +71,7 @@ public class PricedAndNamedItemTest {
         String name = "!@##$#@$%#$^$%^&*(&)|{}[]:'<>'";
         BigDecimal test_val = new BigDecimal(1.00);
         PricedAndNamedItem item = new PricedAndNamedItem( test_val, name );
-        assertEquals(name, item.GetName() );
+        assertEquals(name, item.getName() );
     }
     
     /**
@@ -84,7 +84,7 @@ public class PricedAndNamedItemTest {
         String name = "Test";
         BigDecimal test_val = new BigDecimal(0.00);
         PricedAndNamedItem item = new PricedAndNamedItem( test_val, name );
-        assertEquals(test_val, item.GetCost() );
+        assertEquals(test_val, item.getCost() );
     }
     
     /**
@@ -97,7 +97,7 @@ public class PricedAndNamedItemTest {
         String name = "Test";
         BigDecimal test_val = new BigDecimal(-1.00);
         PricedAndNamedItem item = new PricedAndNamedItem( test_val, name );
-        assertEquals(new BigDecimal(0.00), item.GetCost() );
+        assertEquals(new BigDecimal(0.00), item.getCost() );
     }
     
     /**
@@ -110,7 +110,7 @@ public class PricedAndNamedItemTest {
         String name = "Test";
         BigDecimal test_val = new BigDecimal(25.00);
         PricedAndNamedItem item = new PricedAndNamedItem( test_val, name );
-        assertEquals(test_val, item.GetCost() );
+        assertEquals(test_val, item.getCost() );
     }
     
 }

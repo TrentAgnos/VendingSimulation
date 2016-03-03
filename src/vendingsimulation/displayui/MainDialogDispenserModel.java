@@ -10,6 +10,8 @@ import java.util.Vector;
 
 import vendingsimulation.common.CommonIncludes;
 import vendingsimulation.dispenser.Dispenser;
+import vendingsimulation.mechanicaldevices.CreditReader;
+import vendingsimulation.moneystorage.CurrentCredits;
 import vendingsimulation.types.Credit;
 import vendingsimulation.types.VendableItem;
 
@@ -23,19 +25,37 @@ public class MainDialogDispenserModel implements MainDialogModel
      * Dispenser used for dispensing product based on UI actions.
      */
     Dispenser m_dispenser;
+    /**
+     * Controller for main dialog
+     */
     MainDialogController m_controller;
+    /**
+     * Class responsible for tracking customer inserted credits.
+     */
+    CurrentCredits m_cur_credits;
+    /***
+     * This is another class that shouldn't be here. I need it because
+     * while a real machine would be looping and reading from a register
+     * I only have a UI. So I place it here to send the voltage from the UI.
+     */
+    CreditReader m_reader;
     
     /**
      * Constructor
      * @param dispenser Dispenser responsible for handling product
      * dispensation.
      * @param controller The dialog controller this model uses
+     * @param cur_credits The class responsible for tracking the customer
+     * inserted credits
      */
     public MainDialogDispenserModel( Dispenser dispenser, 
-        MainDialogController controller )
+        MainDialogController controller, CurrentCredits cur_credits,
+        CreditReader reader )
     {
         m_dispenser = dispenser;
         m_controller = controller;
+        m_cur_credits = cur_credits;
+        m_reader = reader;
     }
     
     /**
@@ -44,7 +64,7 @@ public class MainDialogDispenserModel implements MainDialogModel
      */
     public void itemRequested( VendableItem item )
     {
-        m_dispenser.dispenseItem( item );
+        handleDispenseReturn( m_dispenser.dispenseItem( item ) );
     }
     
     /**
@@ -52,8 +72,11 @@ public class MainDialogDispenserModel implements MainDialogModel
      * @param voltage_from_credit_reader The voltage received from the
      * credit reader, which defines the type of credit inserted
      */
-    public void creditInserted( double voltage_from_credit_reader )
+    public void creditInserted( BigDecimal voltage_from_credit_reader )
     {
+        m_reader.newVoltage( voltage_from_credit_reader );
+        m_controller.setDisplayText( 
+            m_cur_credits.getCurrentCredits().toString() );
         
     }
     

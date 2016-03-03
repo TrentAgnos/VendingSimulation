@@ -21,7 +21,7 @@ public class MessageDialogItemVender implements ItemVender
     @Override
     public void vendItem( VendableItem item )
     {
-        String output = String.format("Vended: %s", item.GetName());
+        String output = String.format("Vended: %s", item.getName());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Item Vended");
         alert.setHeaderText(output);

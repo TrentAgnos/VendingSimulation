@@ -13,7 +13,7 @@
       <Button fx:id="buttonCandy" layoutX="165.0" layoutY="129.0" mnemonicParsing="false" onAction="#handleButtonCandy" text="Candy" />
       <Button fx:id="buttonChips" layoutX="96.0" layoutY="129.0" mnemonicParsing="false" onAction="#handleButtonChips" text="Chips" />
       <ChoiceBox fx:id="choiceBoxCoins" layoutX="430.0" layoutY="188.0" prefWidth="150.0" />
-      <Label fx:id="labelDisplay" layoutX="432.0" layoutY="133.0" prefHeight="39.0" prefWidth="150.0" textAlignment="CENTER">
+      <Label fx:id="labelDisplay" layoutX="429.0" layoutY="110.0" prefHeight="39.0" prefWidth="150.0" textAlignment="CENTER">
          <font>
             <Font size="27.0" />
          </font>

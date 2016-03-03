@@ -20,7 +20,7 @@ public interface MainDialogModel
      * @param voltage_from_credit_reader The voltage received from the
      * credit reader, which defines the type of credit inserted
      */
-    void creditInserted( double voltage_from_credit_reader );
+    void creditInserted( BigDecimal voltage_from_credit_reader );
     
     /**
      * Handle when the customer requests inserted credits be returned.
