@@ -43,4 +43,10 @@ public interface ChangeMaker
      * Return the customer all inserted but unspent credits
      */
     void ejectUnspentMoney();
+    
+    /**
+     * Return true if this machine requires exact change
+     * @return True if exact change needed
+     */
+    boolean checkIfExactChangeNeeded();
 }

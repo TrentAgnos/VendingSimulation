@@ -153,9 +153,16 @@ public class NickelDimeQuarterChangeMaker implements ChangeMaker
      * Return true if this machine requires exact change
      * @return True if exact change needed
      */
-    private boolean checkIfExactChangeNeeded()
+    public boolean checkIfExactChangeNeeded()
     {
-        return false;
+        boolean two_dimes_one_nickel = ( ( m_num_nickels >= 1 ) && 
+            ( m_num_dimes >= 2 ) );
+        boolean one_dime_three_nickels = ( ( m_num_nickels >= 3 ) && 
+            ( m_num_dimes >= 1 ) );
+        boolean five_nickels = m_num_nickels >= 5;
+        return !two_dimes_one_nickel && !one_dime_three_nickels && 
+            !five_nickels;
+        
     }
     
     /**

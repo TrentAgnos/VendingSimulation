@@ -72,6 +72,7 @@ public class VerificationDispenser implements Dispenser
                     m_current_credits.getCurrentCredits().
                         subtract(item.getCost()) ) )
                 {
+                    m_change_maker.creditsSpent();
                     m_current_credits.creditsSpent();
                     return CommonIncludes.DispensingReturns.SUCCESSFUL_VEND;
                 }

@@ -60,6 +60,12 @@ public class MainDialogDispenserModel implements MainDialogModel
         m_cur_credits = cur_credits;
         m_reader = reader;
         m_change_maker = change_maker;
+        
+        if ( m_change_maker.checkIfExactChangeNeeded() )
+        {
+            handleExactChangeNeeded();
+        }
+        
     }
     
     /**
@@ -69,6 +75,10 @@ public class MainDialogDispenserModel implements MainDialogModel
     public void itemRequested( VendableItem item )
     {
         handleDispenseReturn( m_dispenser.dispenseItem( item ), item );
+        if ( m_change_maker.checkIfExactChangeNeeded() )
+        {
+            handleExactChangeNeeded();
+        }
     }
     
     /**
@@ -101,7 +111,7 @@ public class MainDialogDispenserModel implements MainDialogModel
      */
     public void handleExactChangeNeeded()
     {
-        
+        m_controller.setExactChangeText( "Exact Change Needed" );
     }
     
     /**
