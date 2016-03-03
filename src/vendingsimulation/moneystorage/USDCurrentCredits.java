@@ -1,6 +1,8 @@
 package vendingsimulation.moneystorage;
 
 import java.math.BigDecimal;
+import vendingsimulation.types.Credit;
+import vendingsimulation.types.USDCredit;
 
 /**
  * Tracks current credits inserted but only in USD
@@ -8,11 +10,15 @@ import java.math.BigDecimal;
 public class USDCurrentCredits implements CurrentCredits
 {
     /**
+     * The value of the user inserted credits in USD.
+     */
+    private BigDecimal m_current_user_credits = BigDecimal.ZERO;
+    
+    /**
      * Constructor
      */
     public USDCurrentCredits()
     {
-        
     }
     
     /**
@@ -22,7 +28,7 @@ public class USDCurrentCredits implements CurrentCredits
      */
     public boolean hasEnoughCredits( BigDecimal cost )
     {
-        return false;
+        return ( m_current_user_credits.compareTo( cost ) >= 0 );
     }
     
     /**
@@ -31,7 +37,7 @@ public class USDCurrentCredits implements CurrentCredits
      */
     public void creditsSpent()
     {
-        
+        m_current_user_credits = BigDecimal.ZERO;
     }
     
     /**
@@ -41,6 +47,20 @@ public class USDCurrentCredits implements CurrentCredits
      */
     public BigDecimal getCurrentCredits()
     {
-        return BigDecimal.ONE;
+        return m_current_user_credits;
+    }
+    
+    /**
+     * Handle when a new credit is inserted by adding to the total
+     * if and only if it is a USD credit
+     * @param credit The new credit inserted
+     */
+    public void newCreditInserted( Credit credit )
+    {
+        if ( credit.getMonetarySystem().equals( USDCredit.MONETARY_SYSTEM ) )
+        {
+            m_current_user_credits = 
+                m_current_user_credits.add( credit.getValue() );
+        }
     }
 }

@@ -2,35 +2,30 @@ package vendingsimulation.types;
 
 import java.math.BigDecimal;
 
-import vendingsimulation.types.Credit;
-
 /**
- * A generic representation of some US monetary item
+ * Represents an unknown credit. Credits are unknown because the credit reader
+ * is incapable of reading the inserted type.
  */
-public class USDCredit extends Credit
+public class UnknownCredit extends Credit
 {
     /**
      * The name of the credit
      */
-    private String m_name;
+    public final static String m_name = "Unknown";
     /**
      * The name of the monetary system this credit is a part of.
      */
-    public final static String MONETARY_SYSTEM = "USD";
+    public final static String MONETARY_SYSTEM = "Unknown";
     /**
      * The value of this credit in its monetary system
      */
-    private BigDecimal m_value;
+    public final static BigDecimal m_value = BigDecimal.ZERO;
     
     /**
      * Constructor
-     * @param name The name of the credit
-     * @param value The value of the credit in its own system
      */
-    public USDCredit( String name, BigDecimal value )
+    public UnknownCredit(  )
     {
-        m_name = name;
-        m_value = value;
     }
     
     /**

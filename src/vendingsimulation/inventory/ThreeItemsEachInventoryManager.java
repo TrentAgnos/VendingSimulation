@@ -46,9 +46,9 @@ public class ThreeItemsEachInventoryManager implements InventoryManager
             CommonIncludes.COST_OF_CANDY, CommonIncludes.CANDY_NAME );
         PricedAndNamedItem chips = new PricedAndNamedItem( 
             CommonIncludes.COST_OF_CHIPS, CommonIncludes.CHIPS_NAME );
-        m_inventory_storage.put( cola.GetName(), storage_space );
-        m_inventory_storage.put( candy.GetName(), storage_space );
-        m_inventory_storage.put( chips.GetName(), storage_space );
+        m_inventory_storage.put( cola.getName(), storage_space );
+        m_inventory_storage.put( candy.getName(), storage_space );
+        m_inventory_storage.put( chips.getName(), storage_space );
     }
     
     /**
@@ -59,7 +59,7 @@ public class ThreeItemsEachInventoryManager implements InventoryManager
     @Override
     public boolean hasInventory( VendableItem item )
     {
-        Integer val = m_inventory_storage.get( item.GetName() );
+        Integer val = m_inventory_storage.get( item.getName() );
         if ( val == null )
         {
             return false;
@@ -85,8 +85,8 @@ public class ThreeItemsEachInventoryManager implements InventoryManager
         else
         {
             m_item_vender.vendItem( item );
-            Integer val = m_inventory_storage.get( item.GetName() );
-            m_inventory_storage.put( item.GetName() , --val );
+            Integer val = m_inventory_storage.get( item.getName() );
+            m_inventory_storage.put( item.getName() , --val );
             return true;
         }
     }

@@ -2,12 +2,16 @@ package vendingsimulation.moneystorage.stubs;
 
 import java.math.BigDecimal;
 
+import vendingsimulation.common.CommonIncludes;
 import vendingsimulation.moneystorage.ChangeMaker;
+import vendingsimulation.types.Credit;
+import vendingsimulation.types.UnknownCredit;
 
 public class StubChangeMaker implements ChangeMaker
 {
     public boolean m_can_make_change = true;
     public boolean m_asked_to_give_change = false;
+    public Credit m_last_credit = new UnknownCredit();
     
     public StubChangeMaker()
     {
@@ -24,9 +28,10 @@ public class StubChangeMaker implements ChangeMaker
         return true;
     }
     
-    public boolean creditInserted( BigDecimal voltage )
+    public CommonIncludes.CreditInsertedReturns creditInserted( Credit credit )
     {
-        return true;
+        m_last_credit = credit;
+        return CommonIncludes.CreditInsertedReturns.SUCCESS;
     }
     
     public void creditsSpent()

@@ -24,8 +24,8 @@ public class USDCreditTest
     @Before
     public void setUp() 
     {
-        nickel = new USDCredit( CommonIncludes.NICKLE_NAME, 
-            CommonIncludes.VALUE_OF_NICKLE );
+        nickel = new USDCredit( CommonIncludes.NICKEL_NAME, 
+            CommonIncludes.VALUE_OF_NICKEL );
         dime = new USDCredit( CommonIncludes.DIME_NAME, 
             CommonIncludes.VALUE_OF_DIME );
         quarter = new USDCredit( CommonIncludes.QUARTER_NAME, 
@@ -39,9 +39,9 @@ public class USDCreditTest
     @Test
     public void testCorrectNameReturned() {
         System.out.println("testCorrectNameReturned");
-        assertEquals( CommonIncludes.NICKLE_NAME, nickel.GetName() );
-        assertEquals( CommonIncludes.DIME_NAME, dime.GetName() );
-        assertEquals( CommonIncludes.QUARTER_NAME, quarter.GetName() );
+        assertEquals(CommonIncludes.NICKEL_NAME, nickel.getName() );
+        assertEquals( CommonIncludes.DIME_NAME, dime.getName() );
+        assertEquals( CommonIncludes.QUARTER_NAME, quarter.getName() );
     }
 
     /**
@@ -50,9 +50,9 @@ public class USDCreditTest
     @Test
     public void testGetValue() {
         System.out.println("testGetValue");
-        assertEquals( CommonIncludes.VALUE_OF_NICKLE, nickel.GetValue() );
-        assertEquals( CommonIncludes.VALUE_OF_DIME, dime.GetValue() );
-        assertEquals( CommonIncludes.VALUE_OF_QUARTER, quarter.GetValue() );
+        assertEquals(CommonIncludes.VALUE_OF_NICKEL, nickel.getValue() );
+        assertEquals( CommonIncludes.VALUE_OF_DIME, dime.getValue() );
+        assertEquals( CommonIncludes.VALUE_OF_QUARTER, quarter.getValue() );
     }
 
     /**
@@ -62,11 +62,11 @@ public class USDCreditTest
     public void testGetMonetarySystem() {
         System.out.println("testGetValue");
         assertEquals(USDCredit.MONETARY_SYSTEM, 
-            nickel.GetMonetarySystem() );
+            nickel.getMonetarySystem() );
         assertEquals( USDCredit.MONETARY_SYSTEM,
-            dime.GetMonetarySystem());
+            dime.getMonetarySystem());
         assertEquals( USDCredit.MONETARY_SYSTEM, 
-            quarter.GetMonetarySystem() );
+            quarter.getMonetarySystem() );
     }
     
 }

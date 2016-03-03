@@ -1,6 +1,7 @@
 package vendingsimulation.moneystorage;
 
 import java.math.BigDecimal;
+import vendingsimulation.common.CommonIncludes;
 
 import vendingsimulation.types.Credit;
 
@@ -27,11 +28,10 @@ public interface ChangeMaker
     /**
      * Informs the ChangeMaker that a credit has been inserted but
      * not yet spent
-     * @param voltage The voltage found on the pin when the 
-     * coin passed through the slot
+     * @param credit The credit inserted
      * @return True if the ChangeMaker still has room for more change.
      */
-    boolean creditInserted( BigDecimal voltage );
+    CommonIncludes.CreditInsertedReturns creditInserted( Credit credit );
     
     /**
      * Informs the ChangeMaker that credits inserted can now be
