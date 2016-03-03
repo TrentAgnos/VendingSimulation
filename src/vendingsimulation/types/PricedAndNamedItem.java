@@ -26,7 +26,7 @@ public class PricedAndNamedItem implements VendableItem
      * Returns the cost of this item
      * @return A big decimal representing the cost of this item
      */
-    public BigDecimal GetCost()
+    public BigDecimal getCost()
     {
         return m_cost;
     }
@@ -35,7 +35,7 @@ public class PricedAndNamedItem implements VendableItem
      * Returns the name of this item.
      * @return A string representing the name of this object.
      */
-    public String GetName()
+    public String getName()
     {
         return m_name;
     }

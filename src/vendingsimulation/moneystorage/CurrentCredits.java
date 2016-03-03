@@ -1,6 +1,7 @@
 package vendingsimulation.moneystorage;
 
 import java.math.BigDecimal;
+import vendingsimulation.types.Credit;
 
 public interface CurrentCredits 
 {
@@ -21,4 +22,10 @@ public interface CurrentCredits
      * @return The value of the credits the customer inserted
      */
     BigDecimal getCurrentCredits();
+    
+    /**
+     * Handle when a new credit is inserted
+     * @param credit The new credit inserted
+     */
+    void newCreditInserted( Credit credit );
 }

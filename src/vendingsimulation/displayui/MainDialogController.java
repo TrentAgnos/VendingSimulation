@@ -46,7 +46,7 @@ public class MainDialogController implements Initializable
     public void initialize(URL url, ResourceBundle rb) {
         // TODO replace this with a separate file holding the supported
         // insert types and translations.
-        choiceBoxCoins.getItems().addAll("Penny", "Nickle", "Dime", "Quarter", 
+        choiceBoxCoins.getItems().addAll("Penny", "Nickel", "Dime", "Quarter", 
             "Half Dollar", "Euro");
         choiceBoxCoins.getSelectionModel().selectFirst();
     }  
